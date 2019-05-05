@@ -52,6 +52,14 @@ jobs:
           command: 'autoreconf -i'
 
       - run:
+          name: Run automake
+          command: 'automake'
+
+      - run:
+          name: Run libtoolize
+          command: 'autoconf'
+
+      - run:
           name: Run libtoolize
           command: 'libtoolize'
       
