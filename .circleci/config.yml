@@ -56,7 +56,7 @@ jobs:
           command: 'automake'
 
       - run:
-          name: Run libtoolize
+          name: Run autoconf
           command: 'autoconf'
 
       - run:

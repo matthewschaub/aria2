@@ -134,9 +134,6 @@ AM_CONDITIONAL([HAVE_RST2HTML], [ test "x$RST2HTML" != "x" ])
 # Setting language choice
 AC_LANG([C++])
 
-# Check pkg-config is available
-PKG_PROG_PKG_CONFIG([0.20])
-
 # Check C++ compiler supports C++0x/C++11 feature
 save_CXXFLAGS="$CXXFLAGS"
 CXXFLAGS=
