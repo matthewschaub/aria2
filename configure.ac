@@ -134,6 +134,9 @@ AM_CONDITIONAL([HAVE_RST2HTML], [ test "x$RST2HTML" != "x" ])
 # Setting language choice
 AC_LANG([C++])
 
+# Check pkg-config is available
+PKG_PROG_PKG_CONFIG[0.20]
+
 # Check C++ compiler supports C++0x/C++11 feature
 save_CXXFLAGS="$CXXFLAGS"
 CXXFLAGS=
@@ -197,6 +200,13 @@ else
 fi
 
 # Checks for libraries.
+
+# Check availability of cppunit
+PKG_CHECK_MODULES([CPPUNIT], [cppunit >= 1.10.2],
+                  [have_cppunit=yes], [have_cppunit=no])
+if test "x$have_cppunit" != "xyes"; then
+  AC_MSG_WARN([$CPPUNIT_PKG_ERRORS])
+fi
 
 # Check availability of libz
 if test "x$with_libz" = "xyes"; then
