@@ -201,13 +201,6 @@ fi
 
 # Checks for libraries.
 
-# Check availability of cppunit
-PKG_CHECK_MODULES([CPPUNIT], [cppunit >= 1.10.2],
-                  [have_cppunit=yes], [have_cppunit=no])
-if test "x$have_cppunit" != "xyes"; then
-  AC_MSG_WARN([$CPPUNIT_PKG_ERRORS])
-fi
-
 # Check availability of libz
 if test "x$with_libz" = "xyes"; then
   PKG_CHECK_MODULES([ZLIB], [zlib >= 1.2.3], [have_zlib=yes], [have_zlib=no])
