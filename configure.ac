@@ -202,22 +202,10 @@ fi
 # Checks for libraries.
 
 # Check availability of libz
-if test "x$with_libz" = "xyes"; then
-  PKG_CHECK_MODULES([ZLIB], [zlib >= 1.2.3], [have_zlib=yes], [have_zlib=no])
-  if test "x$have_zlib" != "xyes"; then
-    AC_MSG_WARN([$ZLIB_PKG_ERRORS])
-    AC_CHECK_LIB([z], [zlibVersion], [have_zlib=yes], [have_zlib=no])
-
-    if test "x$have_zlib" = "xyes"; then
-      ZLIB_CFLAGS=
-      ZLIB_LIBS="-lz"
-      AC_SUBST([ZLIB_CFLAGS])
-      AC_SUBST([ZLIB_LIBS])
-    elif test "x$with_libz_requested" = "xyes"; then
-      ARIA2_DEP_NOT_MET([libz])
-    fi
-  fi
-  if test "x$have_zlib" = "xyes"; then
+    ZLIB_CFLAGS=
+    ZLIB_LIBS="-lz"
+    AC_SUBST([ZLIB_CFLAGS])
+    AC_SUBST([ZLIB_LIBS])
     AC_DEFINE([HAVE_ZLIB], [1], [Define to 1 if you have zlib.])
     save_CPPFLAGS=$CPPFLAGS
     save_LIBS=$LIBS
@@ -226,8 +214,6 @@ if test "x$with_libz" = "xyes"; then
     AC_CHECK_FUNCS([gzbuffer gzsetparams])
     CPPFLAGS=$save_CPPFLAGS
     LIBS=$save_LIBS
-  fi
-fi
 
 have_libuv=no
 if test "x$with_libuv" = "xyes"; then
