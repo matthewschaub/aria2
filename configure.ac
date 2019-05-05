@@ -135,7 +135,7 @@ AM_CONDITIONAL([HAVE_RST2HTML], [ test "x$RST2HTML" != "x" ])
 AC_LANG([C++])
 
 # Check pkg-config is available
-PKG_PROG_PKG_CONFIG[0.20]
+PKG_PROG_PKG_CONFIG([0.20])
 
 # Check C++ compiler supports C++0x/C++11 feature
 save_CXXFLAGS="$CXXFLAGS"
@@ -201,11 +201,30 @@ fi
 
 # Checks for libraries.
 
+# Check availability of cppunit
+PKG_CHECK_MODULES([CPPUNIT], [cppunit >= 1.10.2],
+                  [have_cppunit=yes], [have_cppunit=no])
+if test "x$have_cppunit" != "xyes"; then
+  AC_MSG_WARN([$CPPUNIT_PKG_ERRORS])
+fi
+
 # Check availability of libz
-    ZLIB_CFLAGS=
-    ZLIB_LIBS="-lz"
-    AC_SUBST([ZLIB_CFLAGS])
-    AC_SUBST([ZLIB_LIBS])
+if test "x$with_libz" = "xyes"; then
+  PKG_CHECK_MODULES([ZLIB], [zlib >= 1.2.3], [have_zlib=yes], [have_zlib=no])
+  if test "x$have_zlib" != "xyes"; then
+    AC_MSG_WARN([$ZLIB_PKG_ERRORS])
+    AC_CHECK_LIB([z], [zlibVersion], [have_zlib=yes], [have_zlib=no])
+
+    if test "x$have_zlib" = "xyes"; then
+      ZLIB_CFLAGS=
+      ZLIB_LIBS="-lz"
+      AC_SUBST([ZLIB_CFLAGS])
+      AC_SUBST([ZLIB_LIBS])
+    elif test "x$with_libz_requested" = "xyes"; then
+      ARIA2_DEP_NOT_MET([libz])
+    fi
+  fi
+  if test "x$have_zlib" = "xyes"; then
     AC_DEFINE([HAVE_ZLIB], [1], [Define to 1 if you have zlib.])
     save_CPPFLAGS=$CPPFLAGS
     save_LIBS=$LIBS
@@ -214,6 +233,8 @@ fi
     AC_CHECK_FUNCS([gzbuffer gzsetparams])
     CPPFLAGS=$save_CPPFLAGS
     LIBS=$save_LIBS
+  fi
+fi
 
 have_libuv=no
 if test "x$with_libuv" = "xyes"; then

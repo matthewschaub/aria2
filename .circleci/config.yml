@@ -42,10 +42,6 @@ jobs:
       - run:
           name: Install autopoint
           command: 'apt-get update && sudo apt-get install -y autopoint'
-      
-      - run:
-          name: Install libtool
-          command: 'apt-get update && sudo apt-get install -y libtool'
 
       - run:
           name: Install pkg-configure
@@ -58,14 +54,6 @@ jobs:
       - run:
           name: Run automake
           command: 'automake'
-
-      - run:
-          name: Run autoconf
-          command: 'autoconf'
-
-      - run:
-          name: Run libtoolize
-          command: 'libtoolize'
       
       - run:
           name: Configure project
@@ -77,4 +65,4 @@ jobs:
 
       - run:
           name: Run Testss
-          command: './test'
+          command: 'make check'
