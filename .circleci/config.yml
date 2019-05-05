@@ -44,6 +44,10 @@ jobs:
           command: 'apt-get update && sudo apt-get install -y autopoint'
 
       - run:
+          name: Install libtool
+          command: 'apt-get update && sudo apt-get install -y libtool'
+
+      - run:
           name: Install pkg-configure
           command: 'apt-get update && sudo apt-get install -y pkg-config'
       
