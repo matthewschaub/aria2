@@ -49,7 +49,7 @@ jobs:
       
       - run:
           name: Configure project
-          command: 'autoreconf -i'
+          command: 'autoreconf -i -I /usr/share/aclocal/'
       
       - run:
           name: Configure project
