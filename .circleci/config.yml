@@ -53,7 +53,7 @@ jobs:
       
       - run:
           name: Configure project
-          command: 'configure'
+          command: './configure'
 
       - run:
           name: Build project
