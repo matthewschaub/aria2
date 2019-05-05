@@ -1,0 +1,64 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: debian:stretch
+
+    steps:
+      - checkout
+
+      - run:
+          name: Installing SUDO
+          command: 'apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/*'
+
+      - run:
+          name: Installing GCC
+          command: 'apt-get update && apt-get install -y gcc g++'
+      
+      - run:
+          name: Install CMAKE
+          command: 'apt-get update && sudo apt-get install -y make'
+
+      - run:
+          name: Install libxml2-dev
+          command: 'apt-get update && sudo apt-get install -y libxml2-dev'
+      
+      - run:
+          name: Install libcppunit-dev
+          command: 'apt-get update && sudo apt-get install -y libcppunit-dev'
+      
+      - run:
+          name: Install autoconf
+          command: 'apt-get update && sudo apt-get install -y autoconf'
+      
+      - run:
+          name: Install automake
+          command: 'apt-get update && sudo apt-get install -y automake'
+      
+      - run:
+          name: Install autotools-dev
+          command: 'apt-get update && sudo apt-get install -y autotools-dev'
+      
+      - run:
+          name: Install autopoint
+          command: 'apt-get update && sudo apt-get install -y autopoint'
+      
+      - run:
+          name: Install libtool
+          command: 'apt-get update && sudo apt-get install -y libtool'
+      
+      - run:
+          name: Configure project
+          command: 'autoreconf -i'
+      
+      - run:
+          name: Configure project
+          command: 'configure'
+
+      - run:
+          name: Build project
+          command: 'make'
+
+      - run:
+          name: Run Testss
+          command: './test'
