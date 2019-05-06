@@ -66,15 +66,15 @@ jobs:
       - run:
           name: Build project
           command: 'make'
-          
-    test: 
-      docker:
-        - image: debian:stretch
 
-      steps:
-        - checkout
+  test: 
+    docker:
+      - image: debian:stretch
 
-        - run:
-            name: Run Testss
-            command: 'make check'
+    steps:
+      - checkout
+
+      - run:
+          name: Run Testss
+          command: 'make check'
 
