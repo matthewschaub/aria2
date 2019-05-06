@@ -68,6 +68,6 @@ jobs:
           command: 'make'
 
       - run:
-          name: Run Testss
+          name: Run Tests
           command: 'make check'
 
