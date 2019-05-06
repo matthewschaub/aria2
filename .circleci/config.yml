@@ -78,11 +78,11 @@ jobs:
           name: Run Testss
           command: 'make check'
 
-  workflows: 
-    verison: 2
-    build_and_test: 
-      jobs:
-        - build
-        - test: 
-            requires: 
-              - build
+workflows: 
+  verison: 2
+  build_and_test: 
+    jobs:
+      - build
+      - test: 
+          requires: 
+            - build
