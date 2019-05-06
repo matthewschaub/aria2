@@ -80,7 +80,7 @@ jobs:
 
 workflows: 
   verison: 2
-  build_and_test: 
+  build_and_tests: 
     jobs:
       - build
       - test: 
