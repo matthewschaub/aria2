@@ -67,6 +67,22 @@ jobs:
           name: Build project
           command: 'make'
 
+  test: 
+    docker:
+      - image: debian:stretch
+
+    steps:
+      - checkout
+
       - run:
           name: Run Testss
           command: 'make check'
+
+  workflows: 
+    verison: 2
+    build_and_test: 
+      jobs:
+        - build
+        - test: 
+          requires: 
+            - build
