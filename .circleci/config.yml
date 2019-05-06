@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -79,7 +79,6 @@ jobs:
           command: 'make check'
 
 workflows: 
-  verison: 2
   build_and_tests: 
     jobs:
       - build
